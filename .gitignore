@@ -1,0 +1,5 @@
+/checkpoints
+/data
+*.avi
+*.weights
+*.yml
