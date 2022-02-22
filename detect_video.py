@@ -115,7 +115,7 @@ def main(_argv):
             iou_threshold=FLAGS.iou,
             score_threshold=FLAGS.score
         )
-
+ 
         # format bounding boxes from normalized ymin, xmin, ymax, xmax ---> xmin, ymin, xmax, ymax
         original_h, original_w, _ = frame.shape
         bboxes = utils.format_boxes(boxes.numpy()[0], original_h, original_w)
@@ -129,11 +129,11 @@ def main(_argv):
         allowed_classes = list(class_names.values())
         
         # custom allowed classes (uncomment line below to allow detections for only people)
-        #allowed_classes = ['person']
+        # allowed_classes = ['person']
 
         # if crop flag is enabled, crop each detection and save it as new image
         if FLAGS.crop:
-            crop_rate = 150 # capture images every so many frames (ex. crop photos every 150 frames)
+            crop_rate = 1 # capture images every so many frames (ex. crop photos every 150 frames)
             crop_path = os.path.join(os.getcwd(), 'detections', 'crop', video_name)
             try:
                 os.mkdir(crop_path)

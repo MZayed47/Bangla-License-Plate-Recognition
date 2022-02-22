@@ -4,8 +4,11 @@ conda env create -f conda-cpu.yml
 
 conda activate yolov4-cpu
 
+################################################################################################################
 
-# Convert darknet weights to tensorflow
+# Convert darknet weights to tensorflow #
+
+# First rename line 14 in ./core/config.py to "coco.names"
 
 ## yolov4
 python save_model.py --weights ./data/yolov4.weights --output ./checkpoints/yolov4-416 --input_size 416 --model yolov4
@@ -21,40 +24,42 @@ python detect.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --
 python detect.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --images "./data/images/Cars.jpg, ./data/images/kite.jpg" --count
 
 # Run yolov4 on video
-python detect_video.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --video ./data/video/test_video.mp4 --output ./detections/test_video.avi --count
+python detect_video.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --video ./data/video/test_video.mp4 --output ./detections/test_video.mp4 --count
+
+# Crop the detections on video
+python detect_video.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --video ./data/video/test_video.mp4 --output ./detections/test_video.mp4 --count --crop
 
 # Run yolov4 on webcam
-python detect_video.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --video 0 --output ./detections/webcam_video.avi --count
+python detect_video.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --video 0 --output ./detections/webcam_video.mp4 --count
 
 
 #########################################################################################################################
+
+# License plate detection and recognition
+
+# First rename line 14 in ./core/config.py to "custom.names"
 
 # custom yolov4
 python save_model.py --weights ./data/custom.weights --output ./checkpoints/custom-416 --input_size 416 --model yolov4
 
 # Run custom yolov4 tensorflow model
-python detect.py --weights ./checkpoints/custom-416 --size 416 --model yolov4 --images ./data/images/car.jpg
+python detect.py --weights ./checkpoints/custom-416 --size 416 --model yolov4 --images ./data/plates/car.jpg
 
 
 # Run License Plate Recognition on images
-python detect.py --weights ./checkpoints/custom-416 --size 416 --model yolov4 --images ./data/images/car2.jpg --plate
+python detect.py --weights ./checkpoints/custom-416 --size 416 --model yolov4 --images ./data/plates/car2.jpg --plate
 
 
 # Run License Plate Recognition on video
-python detect_video.py --weights ./checkpoints/custom-416 --size 416 --model yolov4 --video ./data/video/license_plate.mp4 --output ./detections/recognition.avi --plate
+python detect_video.py --weights ./checkpoints/custom-416 --size 416 --model yolov4 --video ./data/video/license_plate.mp4 --output ./detections/recognition.mp4 --plate
 
 
 # Recommended Route
-python detect_video.py --weights ./checkpoints/custom-416 --size 416 --model yolov4 --video ./data/video/license_plate.mp4 --output ./detections/recognition.avi --crop
+python detect_video.py --weights ./checkpoints/custom-416 --size 416 --model yolov4 --video ./data/video/license_plate.mp4 --output ./detections/recognition.mp4 --crop
 
 
 # OCR on any image
 python detect.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --images ./data/images/dog.jpg --ocr
-
-
-
-
-
 
 
 
