@@ -8,7 +8,7 @@ import numpy as np
 # pytesseract.pytesseract.tesseract_cmd = r'<full_path_to_your_tesseract_executable>'
 # Example tesseract_cmd = r'C:\Program Files (x86)\Tesseract-OCR\tesseract'
 
-plate = "./detections/crop/320/license_plate_1.png"
+plate = "./detections/crop/130/license_plate_1.png"
 
 # point to license plate image (works well with custom crop function)
 gray = cv2.imread(plate, 0)
